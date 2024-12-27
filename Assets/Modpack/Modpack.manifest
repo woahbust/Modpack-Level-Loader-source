@@ -1,0 +1,10 @@
+ManifestFileVersion: 0
+CRC: 3174988278
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: modpack ui.scene
+      Dependencies: {}
+    Info_1:
+      Name: loader
+      Dependencies: {}

@@ -1,0 +1,27 @@
+ManifestFileVersion: 0
+CRC: 2944185867
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c48dabb83290b15636a837cfda9fa943
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: eea360c2a566ae49abedfd74b13368c7
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: d32f1d4deca1f8247a2ac015e04fa68f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2f8488c22dffc9846a61670108150fed, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 37eb72ebc59eadb4285bca78c319b920, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Prefabs/Loader.prefab
+Dependencies: []
