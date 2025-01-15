@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.IO;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using Modpack.UI;
 using UnityEngine;
@@ -25,10 +26,26 @@ namespace Modpack
 			{
 				return;
 			}
-			string text = "Assets/Modpack";
-			UIBundle = AssetBundle.LoadFromFile(Path.Combine(text, "modpack ui.scene"));
-			GameObject gameObject = Instantiate(AssetBundle.LoadFromFile(Path.Combine(text, "loader")).LoadAsset<GameObject>("Loader"));
-			DontDestroyOnLoad(gameObject);
+			if (Application.dataPath != "random text so this does or doesnt run")
+			{
+				Assembly assembly = Assembly.GetAssembly(typeof(Loader));
+				Loader.exportedTypes = Assembly.LoadFile(Path.Combine(Application.dataPath, "Managed", "LegacyLevelLoader.dll")).GetExportedTypes();
+				for (int i = 0; i < Loader.exportedTypes.Length; i++)
+				{
+					try
+					{
+						Loader.exportedTypes[i].GetType().GetField("<Assembly><k__BackingField>", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic).SetValue(Loader.exportedTypes[i], assembly, BindingFlags.NonPublic | BindingFlags.SetField, null, null);
+					}
+					catch (Exception ex)
+					{
+						Debug.Log(ex.ToString());
+					}
+				}
+			}
+			string text = Path.Combine(Application.dataPath, "..\\", "Modpack");
+			Loader.UIBundle = AssetBundle.LoadFromFile(Path.Combine(text, "modpack ui.scene"));
+			GameObject gameObject = global::UnityEngine.Object.Instantiate<GameObject>(AssetBundle.LoadFromFile(Path.Combine(text, "loader")).LoadAsset<GameObject>("Loader"));
+			global::UnityEngine.Object.DontDestroyOnLoad(gameObject);
 			Debug.Log("loading ui scene");
 			gameObject.GetComponent<Loader>().LoadUIScene();
 			Loader.SceneAction._OnSceneLoaded = new UnityAction<Scene, LoadSceneMode>(Loader.OnSceneLoaded);
@@ -71,5 +88,7 @@ namespace Modpack
 		private AsyncOperation async;
 
 		private static AssetBundle UIBundle;
+
+		private static Type[] exportedTypes;
 	}
 }

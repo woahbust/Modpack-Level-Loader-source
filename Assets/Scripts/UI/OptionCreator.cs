@@ -35,10 +35,9 @@ namespace Modpack.UI
 		internal void CreateOptions(ModOption modOption)
 		{
 			this.ClearOptions();
-			OptionTemplate[] array = this.templates;
-			for (int i = 0; i < array.Length; i++)
+			foreach (OptionTemplate template in templates)
 			{
-				array[i].gameObject.SetActive(true);
+				template.gameObject.SetActive(true);
 			}
 			List<ModOption> list = (List<ModOption>)modOption.value;
 			for (int j = 0; j < list.Count; j++)
@@ -57,10 +56,9 @@ namespace Modpack.UI
 				}
 				component.Init();
 			}
-			array = this.templates;
-			for (int k = 0; k < array.Length; k++)
-			{
-				array[k].gameObject.SetActive(false);
+            foreach (OptionTemplate template in templates)
+            {
+				template.gameObject.SetActive(false);
 			}
 			this.UpdateOptions();
 		}
