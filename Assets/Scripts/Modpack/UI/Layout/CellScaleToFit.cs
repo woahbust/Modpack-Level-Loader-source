@@ -13,6 +13,10 @@ namespace Modpack.UI.Layout
 
         [SerializeField]
         private float padding = 0f;
+        [SerializeField]
+        private bool keepRatio = false;
+        [SerializeField]
+        private float ratio = 1f;
 
         // Start is called before the first frame update
         void Awake()
@@ -26,13 +30,15 @@ namespace Modpack.UI.Layout
         {
             if (grid.constraint == GridLayoutGroup.Constraint.FixedColumnCount)
             {
-                float x = rectTransform.rect.width - padding * 2;
-                grid.cellSize = new Vector2(x / grid.constraintCount, grid.cellSize.y);
+                float x = (rectTransform.rect.width - padding * 2) / grid.constraintCount;
+                float y = (keepRatio) ? x / ratio : grid.cellSize.y;
+                grid.cellSize = new Vector2(x, y);
             }
             if (grid.constraint == GridLayoutGroup.Constraint.FixedRowCount)
             {
                 float y = rectTransform.rect.height - padding * 2;
-                grid.cellSize = new Vector2(grid.cellSize.x, y / grid.constraintCount);
+                float x = (keepRatio) ? y * ratio : grid.cellSize.x;
+                grid.cellSize = new Vector2(x, y / grid.constraintCount);
             }
         }
     }

@@ -37,9 +37,9 @@ namespace Modpack.UI
 			ModManager.UpdateEnabled(id, enabled);
 		}
 
-		public OptionList optionList;
-
 		public GameObject window;
+
+		public OptionList optionList;
 
 		public static ModManagerUI Instance;
 
